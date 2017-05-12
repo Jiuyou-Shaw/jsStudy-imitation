@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <title>#1-counter</title>
+        <style>
+            body {
+                height: 100vh;
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            ul {
+                display: flex;
+                flex-flow: wrap;
+                padding: 0;
+                list-style: none;
+            }
+
+            li {
+                margin: 5px;
+                padding: .5rem 1.5rem;
+                border: 1px solid #883377;
+                cursor: pointer;
+            }
+
+            li.selected {
+                background: #d59;
+                color: #fff;
+            }
+
+            div {}
+
+            span {
+                display: inline-block;
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.5rem;
+                line-height: 2.5rem;   
+                text-align: center;
+                background: #4cc;
+                border-radius: 50%;
+            }
+
+            .active {
+                animation: scale .5s ease both;
+            }
+
+            @keyframes scale {
+                0% {
+                    transform: scale(1, 1);
+                }
+                50% {
+                    transform: scale(1.1, 1.1);
+                }
+                100% {
+                    transform: scale(1, 1);
+                }
+            }
+</style>
+    </head>
+
+    <body>
+        <ul>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+            <li>item</li>
+        </ul>
+
+        <div>
+            你选择的数:<span>0</span>
+        </div>
+
+        <script>
+            (function() {
+                var aLiEle = document.querySelectorAll('li');
+                var counter = document.querySelector('span');
+                for(var i=0; i<aLiEle.length; i++) {
+                    aLiEle[i].addEventListener('click', function(){
+                        var hasClass = this.classList.contains('selected');
+                        counterScale();
+                        if(!hasClass) {
+                            this.classList.add('selected');
+                            calSum();
+                        } else {
+                            this.classList.remove('selected');
+                            calSum();
+                        }
+                    })
+                }
+
+                function calSum() {
+                    var sum = document.querySelectorAll('li.selected');
+                    counter.innerText = sum.length;
+                }
+
+                //var st = null;                        //clear时为什么需要st = null
+                function counterScale() {
+                    //clearTimeout(st);                 //为什么要clearTimeout
+                    counter.classList.remove('active');
+                    setTimeout (function() {            //如果不用setTimeout()只有在第一次点击时动画才有效果
+                        counter.classList.add('active');
+                    }, 10);
+                }
+            })();
+        </script>
+
+    </body>
+</html>
