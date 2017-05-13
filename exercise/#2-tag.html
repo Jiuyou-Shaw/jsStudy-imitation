@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tag</title>
+        <style>
+            body {           
+                background: #eee;
+            }
+
+            .container {
+                width: 40vw;
+                height: 40vh;
+                margin: 30vh auto;                  
+                padding: 3rem;              
+                background: #fff;
+                border: 1px solid #eee;
+                border-radius: 20px;
+            }
+
+             #newtag {
+                margin: 0 1rem;
+                padding: .3rem 1rem;
+                border: 1px solid #eee;
+                border-radius: 4px;
+                outline: none;
+            }
+
+            #newtag:focus {
+                border-color: rgba(37,162,222,.8);
+                box-shadow: 0 0 5px rgba(37,162,222,.3);
+            }
+
+            form .btn {
+                padding: .3rem 1rem;               
+                color: #fff;
+                background: #1f93cb;
+                border: 1px solid #1f93cb;
+                border-radius: 4px;
+            }
+
+            .container ul {
+                display: flex;
+                flex-flow: wrap;
+                margin-top: 2rem;
+                padding: 0;
+                list-style: none;
+            }
+
+            ul li {
+                position: relative;
+                margin: .5rem 1rem;
+                padding: .2rem .7rem;
+                font-size: .85rem;
+                color: #fff;
+                background: #1f93cb;
+                border-radius: 4px;
+            }
+
+            ul li:before {
+                position: absolute;
+                right: -.5rem;
+                top: -.5rem;
+                content: '\2297';
+                font-family: 'Arial';
+                background: #1f93cb;
+                border-radius: 50%;
+            }       
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <form class="addtag" method="POST" action="#">
+                <label for="newtag">添加标签:</label>
+                <input name="newtag" id="newtag" type="text" placeholder="添加需要的标签" required>
+                <button type="submit" class="btn">添加</button>
+            </form>
+            <ul class="tags"></ul>
+        </div>
+
+        <script>
+            //1.空格和相同内容都会成为新tag 2.tag内空格
+            (function() {
+
+                var newtag = document.querySelector('#newtag');             
+                var addtag = document.querySelector('.addtag');
+                var tags = document.querySelector('.tags');
+
+                addtag.addEventListener('submit', function(e) {
+                    if(newtag.value != '') {
+                        tags.innerHTML += '<li>' + newtag.value + '</li>';
+                    }
+                    newtag.value='';
+                    newtag.focus();
+                    e .preventDefault();                                 //
+                }, false);                                                  
+
+                tags.addEventListener('click', function(e) {
+                    var deltag = e.target;
+                    if(deltag.tagName === 'LI') {
+                        deltag.parentNode.removeChild(deltag);
+                    }
+                    //e.preventDefault();
+                }, false);
+
+            })();
+        </script>
+    </body>
+</html>
