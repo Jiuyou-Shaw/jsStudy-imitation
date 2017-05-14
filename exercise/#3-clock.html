@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <title>clock</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #9c9;
+            }
+
+            .clock {
+                position: relative;
+                width: 24vh;
+                height: 24vh;
+                margin: 38vh auto;
+                padding: .5rem;             
+                border: 1rem solid #f96;
+                border-radius: 50%;
+                background: #fff;
+            }
+
+            .num  {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                counter-reset: section;
+            }
+
+            .num div {
+                position: absolute;
+                top: 50%;           
+                counter-increment: section;
+                width: 100%;
+            }
+
+            .num div:before {        
+                position: absolute;               
+                content: counter(section);               
+            }
+
+            .hand {
+                position: absolute;              
+                transform-origin: 50% 100% 0;
+            }
+
+            .hour {
+                top: 27%;               /* top + height = 50% */
+                left: 48.5%;            /* left + width / 2 = 50% */
+                background: #000;
+                width: 3%;
+                height: 23%;
+            }
+
+            .minute {
+                top: 20%;
+                left: 48.8%;
+                background: #aaa;
+                width: 2.2%;
+                height: 30%;
+            }
+
+            .second {
+                top: 14%;
+                left: 49.45%;
+                background: #a00;
+                width: 1.1%;
+                height: 36%;
+                
+            }
+
+            .num div:nth-child(1) {
+                transform: rotate(120deg);
+            }
+            .num div:nth-child(1):before {
+                transform: rotate(-120deg);
+            }
+            .num div:nth-child(2) {
+                transform: rotate(150deg);
+            }
+            .num div:nth-child(2):before {
+                transform: rotate(-150deg);
+            }
+            .num div:nth-child(3) {
+                transform: rotate(180deg);
+            }
+            .num div:nth-child(3):before {
+                transform: rotate(-180deg);
+            }
+            .num div:nth-child(4) {
+                transform: rotate(210deg);
+            }
+            .num div:nth-child(4):before {
+                transform: rotate(-210deg);
+            }
+            .num div:nth-child(5) {
+                transform: rotate(240deg);
+            }
+            .num div:nth-child(5):before {
+                transform: rotate(-240deg);
+            }
+            .num div:nth-child(6) {
+                transform: rotate(270deg);
+            }
+            .num div:nth-child(6):before {
+                transform: rotate(-270deg);
+            }
+            .num div:nth-child(7) {
+                transform: rotate(300deg);
+            }
+            .num div:nth-child(7):before {
+                transform: rotate(-300deg);
+            }
+            .num div:nth-child(8) {
+                transform: rotate(330deg);
+            }
+            .num div:nth-child(8):before {
+                transform: rotate(-330deg);
+            }
+            .num div:nth-child(9) {
+                transform: rotate(360deg);
+            }
+            .num div:nth-child(9):before {
+                transform: rotate(-360deg);
+            }
+            .num div:nth-child(10) {
+                transform: rotate(390deg);
+            }
+            .num div:nth-child(10):before {
+                transform: rotate(-390deg);
+            }
+            .num div:nth-child(11) {
+                transform: rotate(420deg);
+            }
+            .num div:nth-child(11):before {
+                transform: rotate(-420deg);
+            }
+            .num div:nth-child(12) {
+                transform: rotate(450deg);
+            }
+            .num div:nth-child(12):before {
+                transform: rotate(-450deg);
+            }
+        </style>
+    </head>
+
+    <body>      
+        <div class="clock">
+            <div class="num">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <div class="hand hour"></div>
+            <div class="hand minute"></div>
+            <div class="hand second"></div>
+        </div>     
+
+        <script>
+            (function() {
+
+                function clock() {
+                    var oHo = document.querySelector('.hour'),
+                        oMi = document.querySelector('.minute'),
+                        oSe = document.querySelector('.second'),
+
+                        nTi = new Date(),
+                        nHo = nTi.getHours(),
+                        nMi = nTi.getMinutes(),
+                        nSe = nTi.getSeconds(),
+
+                        degSe = nSe * 6,                     // nSe / 60 * 360
+                        degMi = nMi * 6 + degSe / 60,        // nMi / 60 * 360
+                        degHo = nHo * 30 + degMi / 60;       // nHo / 12 * 360
+
+                    oSe.style.transform = "rotate(" + degSe + "deg)";
+                    oMi.style.transform = "rotate(" + degMi + "deg)";
+                    oHo.style.transform = "rotate(" + degHo + "deg)";
+                }
+                
+                setInterval(clock, 1000);
+
+            })();
+        </script>
+    <body>
+</html>
