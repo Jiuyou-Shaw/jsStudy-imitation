@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>scale</title>
+        <style>         
+            .container {
+                display: flex;
+                flex-flow: column;
+                width: 30vw;
+                margin: 20vh auto;
+                padding: 1rem 0;
+                background: #eee;
+                border-radius: 10px;
+            }
+
+            .btns {
+                margin: 1rem auto;              
+            }
+
+            .btn {
+                padding: .2rem .8rem;
+                font: "微软雅黑";
+                color: #fff;
+                background: #555;
+                border: none;
+                border-radius: 4px;
+            }
+
+            .box {
+                width: 10vw;
+                height: 10vw;
+                margin: 1rem auto;
+                background: #000;
+                border-radius: 5px;
+            }        
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="btns">
+                <button class="btn">变宽</button>
+                <button class="btn">变高</button>
+                <button class="btn">变色</button>
+                <button class="btn">隐藏</button>
+                <button class="btn">重置</button>
+            </div>
+            <div class="box"></div>
+        </div>
+
+        <script>
+            (function() {
+
+                var btns = document.querySelectorAll('.btn'),
+                    oBox = document.querySelector('.box'),
+                    oAttr = ["width", "height", "background", "display", "display"],
+                    oVal = ["15vw", "15vw", "#15c","none","block"];
+
+                for(var i=0; i<btns.length; i++) {   
+                    btns[i].index = i;                                      //?
+                    btns[i].addEventListener('click', function() {     
+                        this.index == btns.length - 1 && (oBox.style.cssText = "");         //什么意思?
+                        changeStyle(oBox, oAttr[this.index], oVal[this.index]);
+                    });
+                }
+
+                function changeStyle(ele, attr, val) {
+                    ele.style[attr] = val;
+                }
+
+            })();
+        </script>
+    </body>
+</html>
