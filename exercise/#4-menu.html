@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <style>
+            body {
+                height: 100vh;
+                margin: 0;
+                
+            }
+            .sidebar {
+                background: #ccc;
+                width: 20vw;
+                height: 100%;
+                padding-top: 1rem;
+            }
+            ul {
+                list-style: none;  
+                margin: 0;       
+            }
+            a {
+                color: #666;
+                text-decoration: none;
+            }
+            a:active {
+                color: #fff;
+            }
+            /*flag*/
+            li.collapsed,
+            li.expanded {
+                position: relative;
+            }
+            li.collapsed:before,
+            li.expanded:before {
+                content: "";
+                position: absolute;
+                left: -.8rem;
+                top: .4rem;
+                display: inline-block;      /*好像没有影响*/
+                width: .4rem;
+                height: .4rem;
+                
+                border: 1px solid #000;
+                border-bottom: none;
+                border-left: none;
+            }
+            li.collapsed:before {
+                transform: rotate(45deg);
+            }
+            li.expanded:before {
+                transform: rotate(135deg);
+            }
+            /*visibility*/
+            li.collapsed > ul {
+                display: none;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <ul>
+                <li data-level="1" class="expanded">                <!--data-level是什么-->
+                    <a href="javascript:void(0);">Level 1</a>
+                    <ul>
+                        <li data-level="2" class="collapsed">
+                            <a href="javascript:void(0);">Level 2</a>
+                            <ul>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            </ul>
+                        </li>
+                        <li data-level="2" class="collapsed">
+                            <a href="javascript:void(0);">Level 2</a>
+                            <ul>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            </ul>
+                        </li>
+                        <li data-level="2" class="collapsed">
+                            <a href="javascript:void(0);">Level 2</a>
+                            <ul>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                                <li data-level="3"><a href="javascript:void(0);">Level 3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>              
+            </ul>
+
+        </div>
+        <script>
+            (function() {
+                var eleList = document.querySelectorAll("li > a");
+                for (var i = 0; i < eleList.length; i++) {
+                    eleList[i].addEventListener("click", function() {
+                        var hasClass = this.parentNode.classList.contains('collapsed');
+                        var hasUlEle = this.parentNode.getElementsByTagName('ul').length > 0;
+
+                        if (hasUlEle) {
+                            //console.log(hasUlEle);            起什么作用？
+                            if (!hasClass) {
+                                this.parentNode.classList.add('collapsed');
+                                this.parentNode.classList.remove('expanded');
+                            } else {
+                                this.parentNode.classList.remove('collapsed');
+                                this.parentNode.classList.add('expanded');
+                            }
+                        }
+                        //return false;         起什么作用？
+                    });
+                }
+            })();
+        </script>
+    </body>
+</html>
