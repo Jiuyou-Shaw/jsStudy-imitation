@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CH">
+    <head>
+        <meta charset="UTF-8">
+        <title>sum up numbers</title>
+        <style>
+            .container {
+                width: 35%;
+                margin: 20% auto;
+                background: #ccc;
+                border-radius: 10px;
+            }
+            
+            .myForm {
+                padding: 1.5rem 1.5rem;
+                
+            }
+            #inp {
+                width: 10rem;
+                height: 1.3rem;
+                outline: none;
+                border: none;
+                border-radius: 3px;
+            }
+            .myForm label {
+                font-size: .85rem;
+                color: #eee;
+            }
+            .btn {
+                display: block;
+                margin-top: 1rem;
+                padding: .3rem 1rem;
+                color: #eee;
+                background: #444;
+                border-radius: 4px;
+                border: none;
+            }
+            .oup {
+                color: #fff;
+                font-size: 1.5rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+
+            <form class="myForm">
+                <input type="text" id="inp">
+                <label for="inp">输入数字求和，数字之间用半角","隔开</label>
+                <button type="submit" class="btn">求和</button>
+            </form>
+
+            <div class="outp"></div>
+
+        </div>
+
+        <script>
+            //没有正常运行
+            (function(){
+               
+                var oBtn = document.querySelector(".btn"),
+                    inpStr = document.querySelector("#inp"),
+                    inpArr = inpStr.value.replace(/[^(\d)|(,)]/g, "").split(",");
+                                       
+                oBtn.addEventListener("click", function() {                                          
+                    var sum = 0;
+                    for(var i=0; i<inpArr.length; i++){
+                        sum += parseInt(inpArr[i]);
+                    }
+                    alert(sum);                                     
+                });
+                                    
+            })();
+        </script>
+    </body>
+</html>
