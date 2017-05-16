@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>dropdown</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                display: flex;
+                flex-flow: column;
+                width: 9.5rem;
+                margin: 10% auto;
+            }
+
+            .btn {               
+                padding: .3rem .8rem;
+                color: #eee;
+                background: #333;
+                border: none;
+                border-radius: 3px;    
+                outline: none;       
+            }
+
+            .dropdown {     
+                display: none;  
+                border: 1px solid #333;
+                border-radius: 0 0 4px 4px;
+                list-style: none;
+            }
+
+            .on {
+                display: block;
+            }
+
+            .dropdown li {             
+                background: #666;               
+            }
+
+            .dropdown li:last-child {
+                border-top: 1px solid #333;
+            }
+
+            .dropdown li a {
+                display: inline-block;
+                width: 100%;
+                padding-top: .4rem;
+                padding-bottom: .4rem;
+                font-size: 75%;
+                color: #eee;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            .dropdown li:hover {
+                background: #999;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            
+            <button class="btn">输入法</button>
+            
+            <ul class="dropdown">
+                <li><a href="">拼音</a></li>
+                <li><a href="">手写</a></li>
+                <li><a href="">关闭</a></li>
+            </ul>
+
+        </div>
+
+        <script>
+            (function() {
+
+                var oBtn = document.querySelector(".btn"),
+                    dropDown = document.querySelector(".dropdown");   
+
+                oBtn.addEventListener("click", function(e) {
+                    var hasOn = dropDown.classList.contains("on");
+                    if(!hasOn) {
+                        dropDown.classList.add("on");
+                        changeIme();
+                    } else {
+                        dropDown.classList.remove("on");
+                    }
+                    //e.preventDefault();
+                });
+
+
+                var lis = document.querySelectorAll(".dropdown li");
+
+                function changeIme() {
+                    for(let i=0; i<lis.length; i++) {                   
+                        lis[i].addEventListener("click", function() {
+                            if(i == 0 || i == 1) {
+                                alert("Input method changed!");
+                            } else {
+                                dropDown.classList.remove("on");
+                            }                        
+                        });
+                    }
+                }
+
+            })();
+        </script>
+    </body>
+</html>
