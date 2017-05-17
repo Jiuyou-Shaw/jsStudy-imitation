@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>pop up</title>
+    </head>
+
+    <body>
+        <button onclick="cl()">test</button>
+        <script src="dialog.js"></script>
+        <script>
+            
+            function cl() {
+                Dialog({                                            //Diag({}); 这里的Dialog是什么
+                    "title": "这里是标题",
+                    "content": "我是对话框主体内容，我是对话框主体内容",
+                    "btns": 
+                    [{
+                        "value": "确认",
+                         callback: function() {
+                             alert("sucess");
+                         }
+                    }, {
+                        "value": "重复",
+                        callback: function() {
+                            alert("repeat");
+                        }
+                    }, {
+                        "value": "取消",
+                        callback: function() {
+                            alert("cancel");
+                        }
+                    }]
+                });
+            }
+        </script>
+    </body>
+</html>
