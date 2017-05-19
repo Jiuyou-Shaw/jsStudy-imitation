@@ -13,7 +13,7 @@ body {
 }
 .fig {
     position: absolute;
-    left: 0;
+    
     width: 200em;   
     height: 100%;
     overflow: hidden;       /**/
