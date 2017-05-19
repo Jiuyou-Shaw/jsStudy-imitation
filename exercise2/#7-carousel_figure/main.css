@@ -1,20 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #ddd;
+}
 .car-fig {
     position: relative;
     width: 40em;
     height: 28em;
-    border: 2px solid #444;
+    margin: 10em auto;
 }
 .fig {
-    width: 100%;
+    position: absolute;
+    left: 0;
+    width: 200em;   
     height: 100%;
+    overflow: hidden;       /**/
 }
 .fig img {
-    display: none;
-    width: 100%;
+    float: left;
+    width: 40em;
     height: 100%;
 }
-.fig .on {              /**/
-    display: inline;
+.fig .on {              
+    /*display: inline;*/
 }
 .btns {
     position: absolute;
@@ -35,17 +45,22 @@
     background: #a44;
 }
 .arrow {
-    display: inline-block;
+    display: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);   
     font-size: 2em;
-    color: #ccc;
-    background: rgba(0,0,0,0.4);
+    color: #bbb;
+    background: rgba(0,0,0,0.2);
     text-decoration: none;
     cursor: pointer;
 }
-
+.arrow:hover {
+    background: rgba(0,0,0,0.6)
+}
+.car-fig:hover .arrow {
+    display: inline-block;
+}
 .pre {
     left: 1em;
 }

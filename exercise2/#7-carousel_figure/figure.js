@@ -1,43 +1,30 @@
 (function(){
-    var oBtns = document.querySelectorAll(".btns span");
-    var oImgs = document.querySelectorAll(".fig img");
+
+    var oFig = document.querySelector(".fig");
+    var oPre = document.querySelector(".pre");
     var oNext = document.querySelector(".next");
-    
-    for(let i=0; i<oBtns.length; i++) {
 
-        oBtns[i].addEventListener("click", function() {
-            for(let j=0; j<oImgs.length; j++){
-                var hasOn = oImgs[j].classList.contains("on");
-                //点击btn切换
-                if(hasOn) {
-                        oImgs[j].classList.remove("on");
-                        oImgs[i].classList.add("on");
-                        oBtns[j].classList.remove("on");
-                        oBtns[i].classList.add("on");
-                        
-                } else {
-                    oImgs[i].classList.add("on");
-                }
-            } 
-        });
-
-        oNext.addEventListener("click", function() {
-            var hasOn = oImgs[i].classList.contains("on");
-            if(hasOn) {
-                oImgs[i].classList.remove("on");
-                oBtns[i].classList.remove("on");
-                let j = i + 1;
-                if(j < oImgs.length) {                 //i不是最后一项
-                    oImgs[j].classList.add("on");
-                    oBtns[j].classList.add("on");
-                } else {
-                    oImgs[0].classList.add("on");
-                    oBtns[0].classList.add("on");
-                }
-            }
-        });
-
-
+    function Carousel(offset) {
+        var newLeft = parseInt(document.defaultView.getComputedStyle(oFig).left) + offset;
+        document.defaultView.getComputedStyle(oFig).left = newLeft +"px";
+        if(newLeft < -160) {
+            oFig.style.left = 0 + "px";
+        }
+        if(newLeft > 0) {
+            oFig.style.left = 160 + "px";
+        }
     }
-    
+
+    function autoChange() {
+        timer = setInterval(oNext.onclick(), 2000);
+    }
+
+    oPre.addEventListener("click", function(){
+        Carousel(40);
+    });
+
+    oNext.addEventListener("click", function() {
+        Carousel(-40);
+    });
+
 })();
