@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>checkbox</title>
+        <style>
+            fieldset {
+                width: 7em;
+                margin: 10em auto;
+                border-radius: .8em;
+                border:none;
+                background: #eee;
+                
+            }
+
+            div {
+                padding: .4em .2em;
+            }
+            div:first-child {
+                border-bottom: 1px solid #888;
+            }
+        </style>
+    </head>
+
+    <body>
+        <form>
+            <fieldset>
+                <div>
+                    <input type="checkbox" name="foo" id="op-all" value="op-all">
+                    <label for="op-all">全选</label>
+                    <span class="invert">反选</span>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op1" value="op1">
+                    <label for="op1">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op2" value="op2">
+                    <label for="op2">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op3" value="op3">
+                    <label for="op3">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op4" value="op4">
+                    <label for="op4">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op5" value="op5">
+                    <label for="op5">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op6" value="op6">
+                    <label for="op6">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op7" value="op7">
+                    <label for="op7">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op8" value="op8">
+                    <label for="op8">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op9" value="op9">
+                    <label for="op9">选项</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="foo" id="op10" value="op10">
+                    <label for="op10">选项</label>
+                </div>
+            </fieldset>
+        </form>
+        <script>
+            (function(){
+
+                var selAll = document.querySelector("#op-all"),
+                    ops = document.querySelectorAll("input"),
+                    invCheck = document.querySelector(".invert");
+
+                function isCheckAll() {
+                    for(var i=1, n=0; i<ops.length; i++) {
+                        if(ops[i].checked) {
+                            n++;
+                        }
+                    }
+                    selAll.checked = (n == ops.length - 1);
+                }
+
+                //check all
+                selAll.addEventListener("click", function() {
+                    for(let i=1; i<ops.length; i++) {
+                        ops[i].checked = this.checked;
+                    }
+                });
+
+                //invert check 
+                invCheck.addEventListener("click", function() {
+                    for(let i=1; i<ops.length; i++) {
+                        ops[i].checked = !ops[i].checked;
+                    }
+                    isCheckAll();
+                })
+
+                //op-all status
+                for(let i=1; i<ops.length; i++) {
+                    ops[i].addEventListener("click", function() {
+                        isCheckAll();
+                    });
+                }
+
+            })();
+        </script>
+    </body>
+</html>
